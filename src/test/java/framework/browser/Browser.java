@@ -113,6 +113,7 @@ public class Browser {
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("window-size=1920,1080");
         Map<String, Object> chromePrefs = new HashMap<>();
         chromePrefs.put("profile.default_content_settings.popups", 0);
