@@ -74,7 +74,7 @@ public class Browser {
     private static WebDriver initChrome() {
         try {
             DesiredCapabilities caps = DesiredCapabilities.chrome();
-            return new RemoteWebDriver(new URL("http://localhost/4444"), caps);
+            return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), caps);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
