@@ -50,13 +50,6 @@ public class Tests extends BaseTest {
         log("Selecting random catalog element");
         catalogElementTitle = catalogPage.getCatalogElementTitle(index);
         catalogPage.selectCatalogElementByIndex(index);
-
-        checkTitles();
-        log("Starting Logout");
-        catalogElementPage.clickLogout();
-        catalogElementPage.pageLoaded();
-        catalogElementPage.isUserLogouted();
-        log("Logout finished");
     }
 
     private void checkTitles() {
