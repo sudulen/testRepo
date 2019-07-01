@@ -1,0 +1,135 @@
+<?jelly escape-by-default='true'?>
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#38;#38;nbsp&#59;">
+]>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define">
+
+<STYLE>
+BODY, TABLE, TD, TH, P {
+  font-family:Verdana,Helvetica,sans serif;
+  font-size:11px;
+  color:black;
+}
+h1 { color:black; }
+h2 { color:black; }
+h3 { color:black; }
+TD.bg1 { color:white; background-color:#0000C0; font-size:120% }
+TD.bg2 { color:white; background-color:#4040FF; font-size:110% }
+TD.bg3 { color:white; background-color:#8080FF; }
+TD.test_passed { color:blue; }
+TD.test_failed { color:red; }
+TD.console { font-family:Courier New; }
+</STYLE>
+<BODY>
+
+
+<!-- GENERAL INFO -->
+
+<TABLE>
+  <TR><TD valign="center"><B style="font-size: 200%;">BUILD ${build.result}</B></TD></TR>
+  <TR><TD>Build URL</TD><TD><A href="${rooturl}${build.url}">${rooturl}${build.url}</A></TD></TR>
+  <TR><TD>Project:</TD><TD>${project.name}</TD></TR>
+  <TR><TD>Date of build:</TD><TD>${it.timestampString}</TD></TR>
+  <TR><TD>Build duration:</TD><TD>${build.durationString}</TD></TR>
+</TABLE>
+<BR/>
+
+
+
+
+
+<!-- MAVEN ARTIFACTS -->
+
+<j:set var="mbuilds" value="${build.moduleBuilds}" />
+<j:if test="${mbuilds!=null}">
+  <TABLE width="100%">
+      <TR><TD class="bg1"><B>BUILD ARTIFACTS</B></TD></TR>
+      <j:forEach var="m" items="${mbuilds}">
+        <TR><TD class="bg2"><B>${m.key.displayName}</B></TD></TR>
+        <j:forEach var="mvnbld" items="${m.value}">
+        <j:set var="artifacts" value="${mvnbld.artifacts}" />
+        <j:if test="${artifacts!=null and artifacts.size()&gt;0}">
+      <TR>
+        <TD>
+      	  <j:forEach var="f" items="${artifacts}">
+      	    <li>
+      	      <a href="${rooturl}${mvnbld.url}artifact/${f}">${f}</a>
+      	    </li>
+      	  </j:forEach>
+      	</TD>
+      </TR>
+        </j:if>
+        </j:forEach>
+      </j:forEach>
+  </TABLE>
+<BR/>  
+</j:if>
+
+<!-- JUnit TEMPLATE -->
+ <j:set var="junitResultList" value="${it.JUnitTestResult}" />
+  <j:if test="${junitResultList.isEmpty()!=true}">
+    <div class="content">
+      <a href="${rooturl}${build.url}/testReport">
+      </a>
+      <table class="border">
+        <tr>
+          <th class="border">Package</th>
+          <th class="border">Failed</th>
+
+          <th class="border">Passed</th>
+
+          <th class="border">Skipped</th>
+
+          <th class="border">Total</th>
+
+        </tr>
+        <j:forEach var="junitResult" items="${it.JUnitTestResult}">
+          <j:forEach var="packageResult" items="${junitResult.getChildren()}">
+            <tr>
+              <td class="border">
+                <tt>${packageResult.getName()}</tt>
+              </td>
+              <td class="border test_failed">${packageResult.getFailCount()}</td>
+
+              <td class="border test_passed">${packageResult.getPassCount()}</td>
+
+              <td class="border test_skipped">${packageResult.getSkipCount()}</td>
+
+              <td class="border">
+                <b>${packageResult.getPassCount()+packageResult.getFailCount()+packageResult.getSkipCount()}</b>     
+              </td>
+              <td class="border">
+            
+              </td>
+            </tr>
+            <j:forEach var="testResult" items="${packageResult.getChildren()}">            
+	    <tr>
+ 		
+                 	<td class="test" colspan="5">
+                   			<tr><td>${testResult.getName()}</td>
+					<j:choose>
+						<j:when test="${testResult.getPassCount()==1}">
+							<td>Passed</td>
+						</j:when>
+							 <j:when test="${testResult.getPassCount()==0}">
+								<td>Failed</td>
+							</j:when>
+						<j:otherwise>
+       							<td>Skipped</td>
+      						</j:otherwise>
+					</j:choose>
+					</tr>
+			</td>
+
+            </tr>
+				
+            </j:forEach>
+          </j:forEach>
+        </j:forEach>
+      </table>
+      <br />
+    </div>
+  </j:if>
+
+</BODY>
+</j:jelly>
