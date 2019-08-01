@@ -5,8 +5,8 @@ import framework.elements.TextBox;
 import org.openqa.selenium.By;
 
 public class LoginPopup {
-    private Button btnAuthorization = new Button(By.xpath("//*[@id=\"auth-container\"]/div/div[2]/div/form/div[3]/button"));
-    private TextBox txbLoginName = new TextBox(By.xpath("//*[@id=\"auth-container\"]/div/div[2]/div/form/div[1]/div/div[2]/div/div/div/div/input"));
+    private Button btnAuthorization = new Button(By.xpath("//button[contains(text(),'Войти')]"));
+    private TextBox txbLoginName = new TextBox(By.xpath("//input[contains(@placeholder,'Ник или e-mail')]"));
     private TextBox txbLoginPassword = new TextBox(By.xpath("//input[@type='password']"));
 
     public void fillLoginName(String name){

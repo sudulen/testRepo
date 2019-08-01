@@ -15,7 +15,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +50,7 @@ public class Browser {
         Logger.getLogger().info(browserName);
         switch (browserName.toUpperCase()) {
             case "CHROME":
-                return initChrome();
+                return /*isRemote.equals("true") ? initChromeRemote() : */initChrome();
             case "FIREFOX":
                 return isRemote.equals("true") ? initFFRemote() : initFF();
             default:
@@ -72,12 +74,16 @@ public class Browser {
     }
 
     private static WebDriver initChrome() {
+        System.out.println(1);
+        URL myTestURL = ClassLoader.getSystemResource("chromedriver");
+        File myFile = null;
         try {
-            DesiredCapabilities caps = DesiredCapabilities.chrome();
-            return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), caps);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+            myFile = new File(myTestURL.toURI());
+        } catch (URISyntaxException e1) {
         }
+        System.out.println((myFile.getAbsolutePath()));
+        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
+        System.out.println(12);
         return new ChromeDriver(getChromeOptions());
     }
 
