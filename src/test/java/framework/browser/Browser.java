@@ -115,11 +115,11 @@ public class Browser {
         }
         System.out.println((myFile.getAbsolutePath()));
         try {
-            test(Paths.get("src", "test", "resources", "chromedriver").toString());
+            test(Paths.get("/src", "test", "resources", "chromedriver").toString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        System.setProperty("webdriver.chrome.driver", Paths.get("src", "test", "resources", "chromedriver").toString());
+        System.setProperty("webdriver.chrome.driver", Paths.get("/src", "test", "resources", "chromedriver").toString());
         System.out.println(System.getProperty("webdriver.chrome.driver"));
         System.out.println(12);
         return new ChromeDriver(getChromeOptions());
