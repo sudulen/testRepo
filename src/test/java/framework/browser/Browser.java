@@ -119,7 +119,7 @@ public class Browser {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }*/
-        System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/src/test/java/resources/chromedriver");
         System.out.println(System.getProperty("webdriver.chrome.driver"));
         System.out.println(12);
         return new ChromeDriver(getChromeOptions());
