@@ -106,7 +106,7 @@ public class Browser {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }*/
-        System.out.println(1);
+/*        System.out.println(1);
         URL myTestURL = ClassLoader.getSystemResource("chromedriver");
         File myFile = null;
         try {
@@ -118,8 +118,8 @@ public class Browser {
             test(Paths.get("/src", "test", "resources", "chromedriver").toString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }
-        System.setProperty("webdriver.chrome.driver", Paths.get("/src", "test", "resources", "chromedriver").toString());
+        }*/
+        System.setProperty("webdriver.chrome.driver", "src/test/java/resources/chromedriver");
         System.out.println(System.getProperty("webdriver.chrome.driver"));
         System.out.println(12);
         return new ChromeDriver(getChromeOptions());
