@@ -101,12 +101,12 @@ public class Browser {
     private static WebDriver initChrome() {
         //   WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
 
-/*        try {
+      /*  try {
             test();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }*/
-/*        System.out.println(1);
+        }
+        System.out.println(1);*/
         URL myTestURL = ClassLoader.getSystemResource("chromedriver");
         File myFile = null;
         try {
@@ -114,15 +114,17 @@ public class Browser {
         } catch (URISyntaxException e1) {
         }
         System.out.println((myFile.getAbsolutePath()));
-        try {
+/*        try {
             test(Paths.get("/src", "test", "resources", "chromedriver").toString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }*/
-        System.setProperty("webdriver.chrome.driver", "/src/test/java/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
         System.out.println(System.getProperty("webdriver.chrome.driver"));
         System.out.println(12);
-        return new ChromeDriver(getChromeOptions());
+        WebDriver d = new ChromeDriver(getChromeOptions());
+        System.out.println(111);
+        return d;
     }
 
     private static WebDriver initFF() {
