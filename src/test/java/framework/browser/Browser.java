@@ -76,9 +76,9 @@ public class Browser {
         return manager.getSystemProperty("browser");
     }
 
-    public static void test() throws IOException, InterruptedException {
+    public static void test(String path) throws IOException, InterruptedException {
 
-        String command = "which chromium-browser";
+        String command = String.format("chmod +x chromedriver  %s", path);
 
         Process proc = Runtime.getRuntime().exec(command);
 
@@ -99,11 +99,11 @@ public class Browser {
     private static WebDriver initChrome() {
      //   WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
 
-        try {
+/*        try {
             test();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         System.out.println(1);
         URL myTestURL = ClassLoader.getSystemResource("chromedriver");
         File myFile = null;
@@ -113,6 +113,11 @@ public class Browser {
         }
         System.out.println((myFile.getAbsolutePath()));
         System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
+        try {
+            test( myFile.getAbsolutePath());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(System.getProperty("webdriver.chrome.driver"));
         System.out.println(12);
         return new ChromeDriver(getChromeOptions());
