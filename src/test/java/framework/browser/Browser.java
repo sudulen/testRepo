@@ -97,7 +97,7 @@ public class Browser {
     }
 
     private static WebDriver initChrome() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
         return new ChromeDriver(getChromeOptions());
     }
 
