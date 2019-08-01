@@ -77,7 +77,7 @@ public class Browser {
 
     public static void test() throws IOException, InterruptedException {
 
-        String command = "google-chrome --version";
+        String command = "which chromium-browser";
 
         Process proc = Runtime.getRuntime().exec(command);
 
