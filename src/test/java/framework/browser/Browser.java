@@ -99,7 +99,7 @@ public class Browser {
     }
 
     private static WebDriver initChrome() {
-           WebDriverManager.chromedriver().targetPath("/usr/bin/test/").setup();
+           WebDriverManager.chromedriver().targetPath("/usr/bin/test").setup();
 
       /*  try {
             test();
