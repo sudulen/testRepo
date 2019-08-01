@@ -121,8 +121,10 @@ public class Browser {
         }*/
 /*        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
         System.out.println(System.getProperty("webdriver.chrome.driver"));*/
-        System.out.println(myFile.setExecutable(true));;
-        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
+        System.out.println(myFile.setExecutable(true));
+        File f = new File("target/test-classes/chromedriver");
+        f.setExecutable(true);
+        System.setProperty("webdriver.chrome.driver", "target/test-classes/chromedriver");
         System.out.println(12);
         WebDriver d = new ChromeDriver(getChromeOptions());
         System.out.println(111);
