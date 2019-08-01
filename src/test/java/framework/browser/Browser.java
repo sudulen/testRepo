@@ -74,7 +74,7 @@ public class Browser {
 
     private static WebDriver initChrome() {
         System.out.println(1);
-        URL myTestURL = ClassLoader.getSystemResource("chromedriver.exe");
+        URL myTestURL = ClassLoader.getSystemResource("chromedriver");
         File myFile = null;
         try {
             myFile = new File(myTestURL.toURI());
