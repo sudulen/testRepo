@@ -53,7 +53,7 @@ public class Browser {
         Logger.getLogger().info(browserName);
         switch (browserName.toUpperCase()) {
             case "CHROME":
-                return /*isRemote.equals("true") ? initChromeRemote() : */initChrome();
+                return /*isRemote.equals("true") ? initChromeRemote() : */new Browser().initChrome();
             case "FIREFOX":
                 return isRemote.equals("true") ? initFFRemote() : initFF();
             default:
@@ -76,7 +76,7 @@ public class Browser {
         return manager.getSystemProperty("browser");
     }
 
-    public static void test(String path) throws IOException, InterruptedException {
+    public  void test(String path) throws IOException, InterruptedException {
 
         String command = String.format("chmod +x chromedriver  %s", path);
 
@@ -93,10 +93,11 @@ public class Browser {
         }
 
         proc.waitFor();
+        notifyAll();
 
     }
 
-    private static WebDriver initChrome() {
+    private WebDriver initChrome() {
      //   WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
 
 /*        try {
@@ -112,12 +113,13 @@ public class Browser {
         } catch (URISyntaxException e1) {
         }
         System.out.println((myFile.getAbsolutePath()));
-        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
         try {
             test( myFile.getAbsolutePath());
+            wait();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
         System.out.println(System.getProperty("webdriver.chrome.driver"));
         System.out.println(12);
         return new ChromeDriver(getChromeOptions());
