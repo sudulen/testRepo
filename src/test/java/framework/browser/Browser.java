@@ -22,6 +22,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +55,7 @@ public class Browser {
         Logger.getLogger().info(browserName);
         switch (browserName.toUpperCase()) {
             case "CHROME":
-                return /*isRemote.equals("true") ? initChromeRemote() : */new Browser().initChrome();
+                return /*isRemote.equals("true") ? initChromeRemote() : */initChrome();
             case "FIREFOX":
                 return isRemote.equals("true") ? initFFRemote() : initFF();
             default:
@@ -76,9 +78,9 @@ public class Browser {
         return manager.getSystemProperty("browser");
     }
 
-    public  void test(String path) throws IOException, InterruptedException {
+    public static void test(String path) throws IOException, InterruptedException {
 
-        String command = String.format("chmod +x %s/chromedriver ", path);
+        String command = String.format("chmod +x %s ", path);
 
         Process proc = Runtime.getRuntime().exec(command);
 
@@ -88,17 +90,16 @@ public class Browser {
                 new BufferedReader(new InputStreamReader(proc.getInputStream()));
 
         String line = "";
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             System.out.print(line + "\n");
         }
 
         proc.waitFor();
-        notifyAll();
 
     }
 
-    private WebDriver initChrome() {
-     //   WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
+    private static WebDriver initChrome() {
+        //   WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
 
 /*        try {
             test();
@@ -114,12 +115,11 @@ public class Browser {
         }
         System.out.println((myFile.getAbsolutePath()));
         try {
-            test( myFile.getAbsolutePath());
-            wait();
+            test(Paths.get("src", "test", "resources", "chromedriver").toString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
+        System.setProperty("webdriver.chrome.driver", Paths.get("src", "test", "resources", "chromedriver").toString());
         System.out.println(System.getProperty("webdriver.chrome.driver"));
         System.out.println(12);
         return new ChromeDriver(getChromeOptions());
