@@ -99,7 +99,7 @@ public class Browser {
     }
 
     private static WebDriver initChrome() {
-     //      WebDriverManager.chromedriver().setup();
+           WebDriverManager.chromedriver().targetPath("/usr/bin/test/").setup();
 
       /*  try {
             test();
@@ -124,7 +124,7 @@ public class Browser {
   //      System.out.println(myFile.setExecutable(true));
 /*        File f = new File("test-classes/chromedriver");
         f.setExecutable(true);*/
-      System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+ //     System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 //        System.out.println(12);
         WebDriver d = new ChromeDriver(getChromeOptions());
         System.out.println(111);
