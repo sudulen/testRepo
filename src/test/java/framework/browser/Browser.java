@@ -97,7 +97,24 @@ public class Browser {
     }
 
     private static WebDriver initChrome() {
-        WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
+     //   WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
+
+        try {
+            test();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(1);
+        URL myTestURL = ClassLoader.getSystemResource("chromedriver");
+        File myFile = null;
+        try {
+            myFile = new File(myTestURL.toURI());
+        } catch (URISyntaxException e1) {
+        }
+        System.out.println((myFile.getAbsolutePath()));
+        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
+        System.out.println(System.getProperty("webdriver.chrome.driver"));
+        System.out.println(12);
         return new ChromeDriver(getChromeOptions());
     }
 
