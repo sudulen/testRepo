@@ -2,6 +2,7 @@ package framework.browser;
 
 import com.google.common.base.Strings;
 import framework.Logger;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -96,21 +97,7 @@ public class Browser {
     }
 
     private static WebDriver initChrome() {
-        try {
-            test();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(1);
-        URL myTestURL = ClassLoader.getSystemResource("chromedriver");
-        File myFile = null;
-        try {
-            myFile = new File(myTestURL.toURI());
-        } catch (URISyntaxException e1) {
-        }
-        System.out.println((myFile.getAbsolutePath()));
-        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
-        System.out.println(12);
+        WebDriverManager.chromedriver().setup();
         return new ChromeDriver(getChromeOptions());
     }
 
