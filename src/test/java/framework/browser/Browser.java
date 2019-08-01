@@ -99,7 +99,7 @@ public class Browser {
     }
 
     private static WebDriver initChrome() {
-           WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
+        //   WebDriverManager.chromedriver().browserPath("/usr/bin/chromium-browser/chromium").setup();
 
       /*  try {
             test();
@@ -121,6 +121,8 @@ public class Browser {
         }*/
 /*        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
         System.out.println(System.getProperty("webdriver.chrome.driver"));*/
+        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
+        myFile.setExecutable(true);
         System.out.println(12);
         WebDriver d = new ChromeDriver(getChromeOptions());
         System.out.println(111);
