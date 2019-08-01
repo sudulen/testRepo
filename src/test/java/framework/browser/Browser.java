@@ -78,7 +78,7 @@ public class Browser {
 
     public  void test(String path) throws IOException, InterruptedException {
 
-        String command = String.format("chmod +x chromedriver  %s", path);
+        String command = String.format("chmod +x %s/chromedriver ", path);
 
         Process proc = Runtime.getRuntime().exec(command);
 
