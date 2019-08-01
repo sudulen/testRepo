@@ -14,7 +14,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -72,7 +75,32 @@ public class Browser {
         return manager.getSystemProperty("browser");
     }
 
+    public static void test() throws IOException, InterruptedException {
+
+        String command = "google-chrome --version";
+
+        Process proc = Runtime.getRuntime().exec(command);
+
+        // Read the output
+
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(proc.getInputStream()));
+
+        String line = "";
+        while((line = reader.readLine()) != null) {
+            System.out.print(line + "\n");
+        }
+
+        proc.waitFor();
+
+    }
+
     private static WebDriver initChrome() {
+        try {
+            test();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(1);
         URL myTestURL = ClassLoader.getSystemResource("chromedriver");
         File myFile = null;
