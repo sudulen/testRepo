@@ -78,57 +78,10 @@ public class Browser {
         return manager.getSystemProperty("browser");
     }
 
-    public static void test(String path) throws IOException, InterruptedException {
-
-        String command = String.format("chmod +x %s ", path);
-
-        Process proc = Runtime.getRuntime().exec(command);
-
-        // Read the output
-
-        BufferedReader reader =
-                new BufferedReader(new InputStreamReader(proc.getInputStream()));
-
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            System.out.print(line + "\n");
-        }
-
-        proc.waitFor();
-
-    }
 
     private static WebDriver initChrome() {
-           WebDriverManager.chromedriver().targetPath("/usr/bin/test").setup();
-
-      /*  try {
-            test();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(1);*/
-        URL myTestURL = ClassLoader.getSystemResource("chromedriver");
-        File myFile = null;
-        try {
-            myFile = new File(myTestURL.toURI());
-        } catch (URISyntaxException e1) {
-        }
-        System.out.println((myFile.getAbsolutePath()));
-/*        try {
-            test(Paths.get("/src", "test", "resources", "chromedriver").toString());
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }*/
-/*        System.setProperty("webdriver.chrome.driver", myFile.getAbsolutePath());
-        System.out.println(System.getProperty("webdriver.chrome.driver"));*/
-  //      System.out.println(myFile.setExecutable(true));
-/*        File f = new File("test-classes/chromedriver");
-        f.setExecutable(true);*/
- //     System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-//        System.out.println(12);
-        WebDriver d = new ChromeDriver(getChromeOptions());
-        System.out.println(111);
-        return d;
+        WebDriverManager.chromedriver().setup();
+        return new ChromeDriver(getChromeOptions());
     }
 
     private static WebDriver initFF() {
@@ -168,7 +121,6 @@ public class Browser {
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--whitelisted-ips");
         chromeOptions.addArguments("--disable-extension");
         chromeOptions.addArguments("window-size=1920,1080");

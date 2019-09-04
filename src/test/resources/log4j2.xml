@@ -2,7 +2,6 @@
 <Configuration status="INFO">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d{ABSOLUTE} %5p - %m%n"/>
     </Console>
   </Appenders>
   <Loggers>
