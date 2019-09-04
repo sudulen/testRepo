@@ -4,7 +4,7 @@
 
     <test name="Test Case">
         <classes>
-            <class name="onliner.tests.Tests"/>
+            <class name="Tests"/>
         </classes>
     </test>
 
