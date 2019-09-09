@@ -33,9 +33,6 @@ public class Browser {
     private static String browserName = initBrowserName();
     private static String startPage = manager.getSystemProperty("startPage");
     private static String timeoutTime = manager.getSystemProperty("timeout");
-    private static String accountName = manager.getSystemProperty("accountName");
-    private static String accountPassword = manager.getSystemProperty("accountPassword");
-    private static String isRemote = initGrid();
 
     private Browser() {
     }
@@ -64,13 +61,6 @@ public class Browser {
         }
     }
 
-    private static String initGrid() {
-        if (!Strings.isNullOrEmpty(System.getProperty("grid"))) {
-            return System.getProperty("grid");
-        }
-        return manager.getSystemProperty("grid");
-    }
-
     private static String initBrowserName() {
         if (!Strings.isNullOrEmpty(System.getProperty("browser"))) {
             return System.getProperty("browser");
@@ -89,35 +79,6 @@ public class Browser {
         return new FirefoxDriver(getFFOptions());
     }
 
-    private static RemoteWebDriver initChromeRemote() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setPlatform(Platform.LINUX);
-        capabilities.setCapability(ChromeOptions.CAPABILITY, getChromeOptions());
-
-        RemoteWebDriver remoteWebDriver = null;
-        try {
-            remoteWebDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            e.getStackTrace();
-        }
-        return remoteWebDriver;
-    }
-
-    private static RemoteWebDriver initFFRemote() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setPlatform(Platform.LINUX);
-        capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, getFFOptions());
-
-        RemoteWebDriver remoteWebDriver = null;
-        try {
-            remoteWebDriver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
-        } catch (MalformedURLException e) {
-            e.getStackTrace();
-        }
-        return remoteWebDriver;
-    }
 
     private static ChromeOptions getChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -145,14 +106,6 @@ public class Browser {
         firefoxOptions.setBinary(firefoxBinary);
         firefoxOptions.setProfile(profile);
         return firefoxOptions;
-    }
-
-    public static String getAccountName() {
-        return accountName;
-    }
-
-    public static String getAccountPassword() {
-        return accountPassword;
     }
 
     static int getTimeoutTime() {
