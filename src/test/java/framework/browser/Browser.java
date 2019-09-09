@@ -40,6 +40,7 @@ public class Browser {
     public static WebDriver getInstance() {
         if (driver == null) {
             driver = initDriver();
+            driver.manage().window().maximize();
         }
         return driver;
     }
@@ -95,16 +96,8 @@ public class Browser {
     }
 
     private static FirefoxOptions getFFOptions() {
-        FirefoxBinary firefoxBinary = new FirefoxBinary();
-        firefoxBinary.addCommandLineOptions("--headless");
         FirefoxOptions firefoxOptions = new FirefoxOptions();
-        FirefoxProfile profile = new FirefoxProfile();
-        profile.setPreference("browser.download.folderList", 2);
-        profile.setPreference("browser.download.manager.showWhenStarting", false);
-        profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/x-debian-package");
-        firefoxOptions.addArguments();
-        firefoxOptions.setBinary(firefoxBinary);
-        firefoxOptions.setProfile(profile);
+        firefoxOptions.addArguments("--headless");
         return firefoxOptions;
     }
 
