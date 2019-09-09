@@ -49,7 +49,7 @@
 
                     <workingDirectory>target/</workingDirectory>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/TestSuite.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/${suite}.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

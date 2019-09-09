@@ -55,9 +55,9 @@ public class Browser {
         Logger.getLogger().info(browserName);
         switch (browserName.toUpperCase()) {
             case "CHROME":
-                return /*isRemote.equals("true") ? initChromeRemote() : */initChrome();
+                return initChrome();
             case "FIREFOX":
-                return isRemote.equals("true") ? initFFRemote() : initFF();
+                return initFF();
             default:
                 Logger.getLogger().info(String.format("This [%s] browser not implemented. Available browsers are: FireFox, Chrome", browserName));
                 throw new NotImplementedException();
