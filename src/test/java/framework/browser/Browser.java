@@ -85,6 +85,7 @@ public class Browser {
     }
 
     private static WebDriver initFF() {
+        WebDriverManager.firefoxdriver().setup();
         return new FirefoxDriver(getFFOptions());
     }
 
