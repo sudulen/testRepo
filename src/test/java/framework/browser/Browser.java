@@ -26,6 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Browser {
     private static WebDriver driver;
@@ -41,6 +42,8 @@ public class Browser {
         if (driver == null) {
             driver = initDriver();
             driver.manage().window().maximize();
+            driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         return driver;
     }
@@ -50,7 +53,6 @@ public class Browser {
     }
 
     private static WebDriver initDriver() {
-        Logger.getLogger().info(browserName);
         switch (browserName.toUpperCase()) {
             case "CHROME":
                 return initChrome();
@@ -97,6 +99,7 @@ public class Browser {
 
     private static FirefoxOptions getFFOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
+        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "/dev/null");
         firefoxOptions.addArguments("--headless");
         return firefoxOptions;
     }
